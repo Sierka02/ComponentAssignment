@@ -9,6 +9,7 @@ function App() {
     <>
     <HeaderComp />
     <ProductForm/>
+    <OrderInfo/>
     </>
   )
 }
@@ -41,12 +42,14 @@ function ProductForm() {
       setCounter(counter - 1)
     }
   }
-  return(
 
+
+  return(
     <div>
 
       <h3>select product</h3>
 
+    <div className='dropdown'>
       <p>product:</p> 
       <select name="" id="">
         <option value="op1"> product 1</option>
@@ -54,16 +57,40 @@ function ProductForm() {
         <option value="op3">product 3</option>
         <option value="op4"> product 4</option>
       </select>
+      </div>
      
-    <div>
+    <div className='Counterbtn'>
       <p>quantity:</p>
-    <button className='incrementbtn' onClick={incrementCounter}>+</button>
-    <p className='quantitynbr'>{counter}</p>
     <button className='decrementbtn' onClick={decrementCounter}>-</button>
+    <p className='quantitynbr'>{counter}</p>
+    <button className='incrementbtn' onClick={incrementCounter}>+</button>
     </div>
     
 
     </div>
+
+  )
+}
+
+function OrderInfo() {
+
+  return(
+
+    <div>
+    <h3>Order info</h3>
+    <div className='grid-container'>
+      <div className='grid-item'>product</div>
+      <div className='grid-item'>Quantity</div>
+      <div className='grid-item'>Total</div>
+      <div className='grid-item'>Hello</div>
+      <div className='grid-item'>Hello</div>
+      <div className='grid-item'>Hello</div>
+
+    </div>
+
+
+    </div>
+   
 
   )
 }
