@@ -31,6 +31,13 @@ function HeaderComp() {
 
 function ProductForm() {
   const [counter, setCounter] = useState(1)
+  const products = [
+    {name: 'Bike', price: '450'},
+    {name: 'Ice skates', price: '220'},
+    {name: 'Boat', price: '1000'},
+    {name: 'Ski', price: '550'},
+    {name: 'Skateboard', price: '150'},
+  ]
 
   const incrementCounter = () => {
     setCounter(counter + 1)
@@ -48,14 +55,18 @@ function ProductForm() {
 
       <h3>select product</h3>
 
+
     <div className='dropdown'>
       <p>product:</p> 
-      <select name="" id="">
-        <option value="op1"> product 1</option>
-        <option value="op2"> product 2</option>
-        <option value="op3"> product 3</option>
-        <option value="op4"> product 4</option>
-      </select>
+      <select>
+    {
+      products.map (p => 
+       <option key={p.name}>{p.name} {p.price}€</option>
+      )
+    }
+
+  </select>
+
       </div>
      
     <div className='Counterbtn'>
@@ -66,7 +77,6 @@ function ProductForm() {
     </div>
 
     <OrderInfo counterValue = {counter}/>
-    
 
     </div>
 
