@@ -28,9 +28,10 @@ function HeaderComp() {
 
 
 
-
 function ProductForm() {
+
   const [counter, setCounter] = useState(1)
+  const [select, setSelect] = useState('bike')
   const products = [
     {name: 'Bike', price: '450'},
     {name: 'Ice skates', price: '220'},
@@ -38,6 +39,10 @@ function ProductForm() {
     {name: 'Ski', price: '550'},
     {name: 'Skateboard', price: '150'},
   ]
+
+  const selectedProduct = products.find(p => p.name === select)     // this function iterates through the array and finds the p.name value that matches the select value.
+  const totalPrice = selectedProduct ? selectedProduct.price * counter : 0 // this function makes sure a product is selected and it calculates the total price. If there is no selected product, it returns the value of 0.
+
 
   const incrementCounter = () => {
     setCounter(counter + 1)
@@ -49,19 +54,24 @@ function ProductForm() {
     }
   }
 
+  const handleInputChange = (event) => {
+    setSelect(event.target.value)
+    }
+
 
   return(
     <div>
 
       <h3>select product</h3>
 
+     
 
     <div className='dropdown'>
       <p>product:</p> 
-      <select>
+      <select value={select} onChange={handleInputChange}>  {/*Changes the value select, to the value of the selected dropdown item*/}
     {
       products.map (p => 
-       <option key={p.name}>{p.name} {p.price}€</option>
+       <option value={p.name} key={p.name}>{p.name} ({p.price})€</option>
       )
     }
 
@@ -76,14 +86,14 @@ function ProductForm() {
     <button onClick={incrementCounter}>+</button>
     </div>
 
-    <OrderInfo counterValue = {counter}/>
+    <OrderInfo product={select} counterValue = {counter} totalPrice={totalPrice}/>
 
     </div>
 
   )
 }
 
-function OrderInfo(props) {
+function OrderInfo({product, counterValue, totalPrice}) {
 
 
   return(
@@ -94,9 +104,9 @@ function OrderInfo(props) {
       <div className='grid-item'>Product</div>
       <div className='grid-item'>Quantity</div>
       <div className='grid-item'>Total</div>
-      <div className='grid-item'>hello</div>
-      <div className='grid-item'>{props.counterValue}</div>
-      <div className='grid-item'>hello</div>
+      <div className='grid-item'>{product}</div>   {/*Display the selected value*/}
+      <div className='grid-item'>{counterValue}</div>
+      <div className='grid-item'>{totalPrice}€</div>
 
     </div>
 
